@@ -11,7 +11,14 @@
   font-weight: 300;
   font-style: normal;
 }
-
+:root {
+  --text: #656565;
+  --sidebar-text: #858585;
+  --sidebar-text--active: var(--accent);
+  --background: #f5f6f8;
+  --sidebar-background: #ffffff;
+  --accent: #684ede;
+}
 html, body {
   height: 100%;
   margin: 0;
