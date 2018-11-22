@@ -1,8 +1,10 @@
+@import './assets/scss/grid.scss';
+
 @font-face {
   font-family: 'SHKODER 1989';
   src: url('./assets/fonts/SHKODER1989-Black.woff2') format('woff2'), url('./assets/fonts/SHKODER1989-Black.woff') format('woff');
   font-weight: 900;
-  font-style: normal;
+  font-style: bold;
 }
 
 @font-face {
@@ -11,6 +13,7 @@
   font-weight: 300;
   font-style: normal;
 }
+
 :root {
   --text: #656565;
   --sidebar-text: #858585;
