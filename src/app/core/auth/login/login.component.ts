@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bit-login',
@@ -8,18 +8,24 @@ import { auth } from 'firebase/app';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  userCredential: firebase.auth.UserCredential;
 
-  constructor(public firebaseAuthentication: AngularFireAuth) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.firebaseAuthentication.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.authService
+      .signInWithGoogle()
+      .then((userCredential: firebase.auth.UserCredential) => {
+        this.userCredential = userCredential;
+        this.router.navigateByUrl('');
+      })
+      .catch((reason: any) => alert('Login failed! Reason: ' + reason));
   }
 
   logout() {
-    this.firebaseAuthentication.auth.signOut();
+    this.authService.signOut();
   }
-
 }
