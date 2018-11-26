@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from '../../core/models/user.model';
+import { AuthService } from '../../core/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bit-layout',
@@ -7,13 +8,21 @@ import { UserModel } from '../../core/models/user.model';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  userProfile: UserModel = {
-    displayName: 'User',
-    //imageUrl: 'https://vignette.wikia.nocookie.net/hitman/images/6/6b/Agent47HITMAN2016.png/revision/latest/scale-to-width-down/350?cb=20160709203721'
-  };
+  user: firebase.User;
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) {
+    this.user = this.authService.user;
+  }
 
   ngOnInit() {
+  }
+
+  protected logout(): void {
+    if (confirm('Are you sure you want to logout?')) {
+      this.authService
+        .signOut()
+        .then(() => this.router.navigateByUrl('/login'))
+        .catch((reason: any) => alert('Error while loggout out! Reason: ' + reason));
+    }
   }
 }
