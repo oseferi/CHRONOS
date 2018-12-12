@@ -17,7 +17,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
   }
 
-  protected logout(): void {
+  public logout(): void {
     if (confirm('Are you sure you want to logout?')) {
       this.authService
         .signOut()
